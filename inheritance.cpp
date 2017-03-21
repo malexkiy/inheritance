@@ -1,15 +1,15 @@
-/*	
+п»ї/*	
 *
 *	+------------------------+---------+-----------+--------+
 *	|                        | private | protected | public |
 *	+------------------------+---------+-----------+--------+
-*	| доступ из класса       | открыт  | открыт    | открыт |
+*	| РґРѕСЃС‚СѓРї РёР· РєР»Р°СЃСЃР°       | РѕС‚РєСЂС‹С‚  | РѕС‚РєСЂС‹С‚    | РѕС‚РєСЂС‹С‚ |
 *	+------------------------+---------+-----------+--------+
-*	| доступ из производного | закрыт  | открыт    | открыт |
-*	| класса                 |         |           |        |
+*	| РґРѕСЃС‚СѓРї РёР· РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ | Р·Р°РєСЂС‹С‚  | РѕС‚РєСЂС‹С‚    | РѕС‚РєСЂС‹С‚ |
+*	| РєР»Р°СЃСЃР°                 |         |           |        |
 *	+------------------------+---------+-----------+--------+
-*	| доступ из внешних      | закрыт  | закрыт    | открыт |
-*	| функций и классов      |         |           |        |
+*	| РґРѕСЃС‚СѓРї РёР· РІРЅРµС€РЅРёС…      | Р·Р°РєСЂС‹С‚  | Р·Р°РєСЂС‹С‚    | РѕС‚РєСЂС‹С‚ |
+*	| С„СѓРЅРєС†РёР№ Рё РєР»Р°СЃСЃРѕРІ      |         |           |        |
 *	+------------------------+---------+-----------+--------+
 *
 */
@@ -29,7 +29,7 @@ public:
 };
 
 
-// public- и protected-члены базового доступны как private-члены производного
+// public- Рё protected-С‡Р»РµРЅС‹ Р±Р°Р·РѕРІРѕРіРѕ РґРѕСЃС‚СѓРїРЅС‹ РєР°Рє private-С‡Р»РµРЅС‹ РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ
 class B : private A {
 public:
 	void inh_private();
@@ -40,7 +40,7 @@ public:
 };
 
 
-// public- и protected-члены базового доступны как protected-члены производного
+// public- Рё protected-С‡Р»РµРЅС‹ Р±Р°Р·РѕРІРѕРіРѕ РґРѕСЃС‚СѓРїРЅС‹ РєР°Рє protected-С‡Р»РµРЅС‹ РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ
 class C : protected A {
 public:
 	void inh_private();
@@ -51,7 +51,7 @@ public:
 };
 
 
-// public-члены базового доступны как public-члены производного; protected-члены базового доступны как protected-члены производного
+// public-С‡Р»РµРЅС‹ Р±Р°Р·РѕРІРѕРіРѕ РґРѕСЃС‚СѓРїРЅС‹ РєР°Рє public-С‡Р»РµРЅС‹ РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ; protected-С‡Р»РµРЅС‹ Р±Р°Р·РѕРІРѕРіРѕ РґРѕСЃС‚СѓРїРЅС‹ РєР°Рє protected-С‡Р»РµРЅС‹ РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ
 class D : public A {
 public:
 	void inh_private();
@@ -70,38 +70,38 @@ int main()
 	D d;
 
 
-	//a.private_method();	// недоступно - т.к. private
+	//a.private_method();	// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - С‚.Рє. private
 
-	//a.protected_method();	// недоступно - т.к. protected
+	//a.protected_method();	// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - С‚.Рє. protected
 
 	a.public_method();
 
 
-	//b.public_method();	// недоступно - наследуется как private
+	//b.public_method();	// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - РЅР°СЃР»РµРґСѓРµС‚СЃСЏ РєР°Рє private
 
-	b.inh_private();		// вызов private- из A
+	b.inh_private();		// РІС‹Р·РѕРІ private- РёР· A
 
-	b.inh_protected();		// вызов protected- из A
+	b.inh_protected();		// РІС‹Р·РѕРІ protected- РёР· A
 
-	b.inh_public();			// вызов public- из A
-
-
-	//c.public_method();	// недоступно - наследуется как protected
-
-	c.inh_private();		// вызов private- из A
-
-	c.inh_protected();		// вызов protected- из A
-
-	c.inh_public();			// вызов public- из A
+	b.inh_public();			// РІС‹Р·РѕРІ public- РёР· A
 
 
-	d.public_method();		// вызов public- из A напрямую
+	//c.public_method();	// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - РЅР°СЃР»РµРґСѓРµС‚СЃСЏ РєР°Рє protected
 
-	d.inh_private();		// вызов private- из A
+	c.inh_private();		// РІС‹Р·РѕРІ private- РёР· A
 
-	d.inh_protected();		// вызов protected- из A
+	c.inh_protected();		// РІС‹Р·РѕРІ protected- РёР· A
 
-	d.inh_public();			// вызов public- из A
+	c.inh_public();			// РІС‹Р·РѕРІ public- РёР· A
+
+
+	d.public_method();		// РІС‹Р·РѕРІ public- РёР· A РЅР°РїСЂСЏРјСѓСЋ
+
+	d.inh_private();		// РІС‹Р·РѕРІ private- РёР· A
+
+	d.inh_protected();		// РІС‹Р·РѕРІ protected- РёР· A
+
+	d.inh_public();			// РІС‹Р·РѕРІ public- РёР· A
 
 	return 0;
 }
@@ -109,7 +109,7 @@ int main()
 
 void B::inh_private()
 {
-	//private_method();		// недоступно - т.к. private в A
+	//private_method();		// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - С‚.Рє. private РІ A
 	std::cout << "B private" << std::endl << std::endl;
 }
 
@@ -130,7 +130,7 @@ void B::inh_public()
 
 void C::inh_private()
 {
-	//private_method();		// недоступно - т.к. private в A
+	//private_method();		// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - С‚.Рє. private РІ A
 	std::cout << "C private" << std::endl << std::endl;
 }
 
@@ -151,7 +151,7 @@ void C::inh_public()
 
 void D::inh_private()
 {
-	//private_method();		// недоступно - т.к. private в A
+	//private_method();		// РЅРµРґРѕСЃС‚СѓРїРЅРѕ - С‚.Рє. private РІ A
 	std::cout << "D private" << std::endl << std::endl;
 }
 
